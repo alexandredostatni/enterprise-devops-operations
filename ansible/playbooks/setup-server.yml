@@ -1,0 +1,32 @@
+---
+- name: Configure TechCorp server
+
+  hosts: devops_servers
+  become: true
+
+  tasks:
+
+    - name: Update package cache
+      apt:
+        update_cache: true
+
+    - name: Install system packages
+      apt:
+        name:
+          - curl
+          - wget
+          - git
+          - python3
+          - python3-pip
+          - ca-certificates
+        state: present
+
+    - name: Set timezone
+      timezone:
+        name: UTC
+
+    - name: Create application directory
+      file:
+        path: /opt/techcorp
+        state: directory
+        mode: "0755"

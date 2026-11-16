@@ -1,0 +1,27 @@
+name: Docker Build
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: |
+          docker build \
+          -t techcorp-orders:${{ github.sha }} \
+          ./application
+
+      - name: Validate image
+        run: |
+          docker image inspect \
+          techcorp-orders:${{ github.sha }}

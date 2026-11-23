@@ -20,3 +20,9 @@ variable "ssh_cidr" {
   description = "Allowed SSH source CIDR"
   type        = string
 }
+
+variable "github_repository" {
+  description = "GitHub repository allowed to assume the publishing role"
+  type        = string
+  default     = "alexandredostatni/enterprise-devops-operations"
+}
